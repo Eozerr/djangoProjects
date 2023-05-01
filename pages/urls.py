@@ -22,9 +22,6 @@ urlpatterns = [
     path('doktor-randevu-iptal/', views.drandevuiptal, name='drandevuiptal'),
     path('doktor-randevu-islem/', views.drandevuislem, name='drandevuislem'),
     path('doktor-sifre-güncelle/', views.dsifredegis, name='dsifredegis'),
-    path('doktor-gecmis-muayne/', views.gecmismuayne, name='gecmismuayne'),
-    path('serviste-bulunan-hastalar/', views.servisyatanhasta, name='servisyatanhasta'),
-    path('taburcu-edilen-hastalar/', views.taburcuhasta, name='taburcuhasta'),    
 
 ]
 
