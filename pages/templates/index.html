@@ -17,12 +17,14 @@
     </div>
 
     <div class="buttongroup">
-        <form action="hastagiris/">  <!-- action özelliği tıklandığında yazılan adres sayfasına gitmesini sağlar -->
+        <form action="{% url 'hgiris' %}">
+ <!-- action özelliği tıklandığında yazılan adres sayfasına gitmesini sağlar -->
             <input type="submit" name="" value="Hasta Girişi">
         </form>
 
         <br>
         <form action="doktor-giris/">
+
             <input type="submit" name="" value="Doktor Girişi">
         </form>
     </div>

@@ -1,10 +1,31 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.contrib.auth import authenticate, login
+
+from pages.models import Hasta
 
 #Hasta tarafı
 def index(request):
     return render(request, 'index.html')
+
+
 def hgiris(request):
-    return render(request, 'hgiris.html')
+    if request.method == "POST":
+        tcno = request.POST.get('tcno')
+        password = request.POST.get('password')
+
+        try:
+            hasta = Hasta.objects.get(tcno=tcno, password=password)
+             # kullanıcı giriş yaptıktan sonra yönlendirileceği sayfanın adını buraya yazın
+        except Hasta.DoesNotExist:
+            error_message = "Geçersiz TC Kimlik No veya Şifre"
+            return render(request, 'hgiris.html', {'error_message': error_message})
+        
+        return render(request,'hanasayfa.html')
+    else:
+        return render(request, 'hgiris.html')
+
+
+
 def hanasayfa(request):
     return render(request, 'hanasayfa.html')
 def hral(request):
