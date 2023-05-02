@@ -160,10 +160,10 @@
                         </select>
                         <dt class="col-sm-5">Hekim</dt>
                         <select name="hekim" id="hekim">
-                            <option value="DR1">Dr1</option>
-                            <option value="DR2">Dr2</option>
-                            <option value="DR3">Dr3</option>
-                        </select>
+                            {% for hekim in hekimler %}
+                                <option value="{{ hekim.id }}">{{ hekim }}</option>
+                            {% endfor %}
+                            </select>
                         <dt class="col-sm-5">Asistan</dt>
                         <select name="asistan" id="asistan">
                             <option value="as1">As1</option>
