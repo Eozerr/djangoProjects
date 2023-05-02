@@ -7,3 +7,9 @@ class Hasta(models.Model):
     
     class Meta:
         db_table = "register_hasta"
+        
+class Doktor(models.Model):
+    sifre = models.CharField(max_length=45)
+
+    class Meta:
+        db_table = "doktor"

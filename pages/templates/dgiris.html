@@ -20,11 +20,13 @@
     <div class="giriskutusu">
     <img src="https://w7.pngwing.com/pngs/505/761/png-transparent-login-computer-icons-avatar-icon-monochrome-black-silhouette.png" class="avatar">
     <h1>Doktor Girişi</h1>
-    <form action="/doktor-anasayfa/">
-        <p>Sicil Numarası</p>
-        <input type="text" name="" placeholder="Sicil Numarası" >
+    <form method="POST">
+        {% csrf_token %}
+        {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+        {% endif %}
         <p>Şifre</p>
-        <input type="password" name="" placeholder="Şifre">
+        <input type="password" name="sifre" placeholder="Şifre">
         <input type="submit" name="" value="Giriş">
         <a href="/sifre-geri-al/">Şifremi unuttum</a>
     </form>

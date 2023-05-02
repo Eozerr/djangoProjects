@@ -16,7 +16,6 @@ urlpatterns = [
     path('sifre-geri-al/', views.hşifreu, name='hşifreu'),
     path('doktor-aktif-muayne/', views.daktifmuayne, name='daktifmuayne'),
     path('doktor-anasayfa/', views.danasayfa, name='danasayfa'),
-    path('doktor-bilgi-görüntüleme/', views.dbilgigoruntuleme, name='dbilgigoruntuleme'),
     path('doktor-giris/', views.dgiris, name='dgiris'),
     path('doktor-randevu-goruntule/', views.drandevugoruntule, name='drandevugoruntule'),
     path('doktor-randevu-iptal/', views.drandevuiptal, name='drandevuiptal'),

@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
 
-from pages.models import Hasta
+from pages.models import Doktor, Hasta
 
 #Hasta tarafı
 def index(request):
@@ -48,8 +48,23 @@ def danasayfa(request):
     return render(request, 'danasayfa.html')
 def dbilgigoruntuleme(request):
     return render(request, 'dbilgigoruntuleme.html')
+
 def dgiris(request):
-    return render(request, 'dgiris.html')
+    
+    if request.method == "POST":
+        sifre = request.POST.get('sifre')
+
+        try:
+            doktor = Doktor.objects.get(sifre=sifre)
+             # kullanıcı giriş yaptıktan sonra yönlendirileceği sayfanın adını buraya yazın
+        except Doktor.DoesNotExist:
+            error_message = "Geçersiz Şifre"
+            return render(request, 'dgiris.html', {'error_message': error_message})
+        
+        return render(request,'danasayfa.html')
+    else:
+        return render(request,'dgiris.html') 
+
 def drandevugoruntule(request):
     return render(request, 'drandevugoruntule.html')
 def drandevuiptal(request):
