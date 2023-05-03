@@ -29,8 +29,7 @@ def hgiris(request):
 def hanasayfa(request):
     return render(request, 'hanasayfa.html')
 def hral(request):
-    hekimler = Doktor.objects.all()
-    return render(request, 'hrandevual.html', {'hekimler': hekimler})
+    return render(request, 'hrandevual.html')
 def hrbilgi(request):
     return render(request, 'hrandevubilgi.html')
 def hriptal(request):
