@@ -1,20 +1,22 @@
+from pyexpat.errors import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
+from pages.forms import LoginForm, RandevuForm
 
-from pages.models import Doktor, Hasta
+from pages.models import Bolum, Doktor,  Hasta, Randevu
 
 #Hasta tarafı
 def index(request):
     return render(request, 'index.html')
 
-
 def hgiris(request):
     if request.method == "POST":
         tcno = request.POST.get('tcno')
         password = request.POST.get('password')
-
+        
         try:
             hasta = Hasta.objects.get(tcno=tcno, password=password)
+            request.session['tcno'] = tcno
              # kullanıcı giriş yaptıktan sonra yönlendirileceği sayfanın adını buraya yazın
         except Hasta.DoesNotExist:
             error_message = "Geçersiz TC Kimlik No veya Şifre"
@@ -28,10 +30,41 @@ def hgiris(request):
 
 def hanasayfa(request):
     return render(request, 'hanasayfa.html')
+
+
 def hral(request):
-    return render(request, 'hrandevual.html')
+    bolumler = Bolum.objects.all()
+    tcno_degeri = request.session.get('tcno')
+    form = RandevuForm(request.POST or None,tcno=tcno_degeri)
+    
+    if request.method == 'POST':
+        # Verileri modele çevir
+        
+        randevu = form.save(commit=False)
+        # Verileri veritabanına kaydet
+        
+        randevu.save()
+        return redirect('hanasayfa.html')
+    return render(request, 'hrandevual.html', {'form': form, 'bolumler': bolumler})
+
+
 def hrbilgi(request):
-    return render(request, 'hrandevubilgi.html')
+    tcno = request.session.get('tcno')
+    if not tcno:
+        return redirect('hgiris')
+    
+    try:
+        randevu = Randevu.objects.get(tcno=tcno)
+        saat = randevu.saat
+        tarih = randevu.tarih
+        bolum = randevu.bolum
+    except Randevu.DoesNotExist:
+        randevu = None
+        messages.warning(request, "Randevunuz bulunmamaktadır.")
+    
+    form = LoginForm()
+    return render(request, 'hrandevubilgi.html', {'randevu': randevu,'saat': saat, 'tarih': tarih, 'bolum': bolum, 'form': form})
+    
 def hriptal(request):
     return render(request, 'hrandevuiptal.html')
 def hrislem(request):

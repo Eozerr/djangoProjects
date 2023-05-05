@@ -32,35 +32,35 @@
     </section>
 
     <div class="container col-md-10 pt-5">
-        <div style="overflow-x:auto;">
-            <table class="table table-striped text-white ">
-                <tr style="background-color:grey">
-                    <th>Bölüm</th>
-                    <th>Randevu Tarihi</th>
-                    <th>Randevu Saati</th>
-                    <th>Bitiş Tarih</th>
-                    <th>Bitiş Saati</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
+        <form method="POST" action="hasta-randevu-bilgi/">
+            <div style="overflow-x:auto;">
+                <table class="table table-striped text-white ">
+                    <tr style="background-color:grey">
+                        <th name = "bolum">Bölüm</th>
+                        <th name = "tarih">Randevu Tarihi</th>
+                        <th name = "saat">Randevu Saati</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
 
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-
-                    <td style="text-align:center"><a href="hastarandevubilgileri.html"
-                            class="btn btn-sm btn-success">Detay Görüntüle</a></td>
-                </tr>
+                    <tr>
+  
+                        <td>{{ randevu.bolum }}</td>
+                        <td>{{ randevu.tarih }}</td>
+                        <td>{{ randevu.saat }}</td>
+                        <td></td>
+                        <td></td>
 
 
-            </table>
-        </div>
+                        <td style="text-align:center"><a href="hastarandevubilgileri.html"
+                                class="btn btn-sm btn-success">Detay Görüntüle</a></td>
+                    </tr>
+
+
+                </table>
+            </div>
+        </form>
     </div>
 </body>
 
