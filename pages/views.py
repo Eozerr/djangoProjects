@@ -2,7 +2,7 @@ from pyexpat.errors import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
 from pages.forms import LoginForm, RandevuForm
-
+from django.core.mail import send_mail
 from pages.models import Bolum, Doktor,  Hasta, Randevu
 
 #Hasta tarafı
@@ -66,6 +66,25 @@ def hrislem(request):
 def hsdegis(request):
     return render(request, 'hsifredegis.html')
 def hşifreu(request):
+    if request.method == 'POST':
+        tcno = request.POST.get('tcno')
+        email = request.POST.get('email')
+        try:
+            hasta = Hasta.objects.get(tcno=tcno)
+           
+                # Şifre sıfırlama kodları buraya yazılacak
+            send_mail(
+                    'Şifre Hatırlatma',
+                    f'Hasta Bilgileriniz:\nTC Kimlik No: {hasta.tcno}\nŞifreniz: {hasta.password}',
+                    'fakeemail123@gmail.com', # fake Gmail hesabınızın kullanıcı adı
+                    [email],
+                    fail_silently=False,     
+                )
+            return redirect('hgiris')
+            
+                
+        except Hasta.DoesNotExist:
+            messages.warning(request, "Girilen TC kimlik numarası ile kayıtlı bir kullanıcı bulunamadı.")
     return render(request, 'hsifreunut.html')
 
 #Hekim tarafı 
