@@ -44,20 +44,19 @@
                         <th></th>
                     </tr>
 
-                    <tr>
-  
-                        <td>{{ randevu.bolum }}</td>
-                        <td>{{ randevu.tarih }}</td>
-                        <td>{{ randevu.saat }}</td>
-                        <td></td>
-                        <td></td>
-
-
-                        <td style="text-align:center"><a href="hastarandevubilgileri.html"
-                                class="btn btn-sm btn-success">Detay Görüntüle</a></td>
-                    </tr>
-
-
+                    
+                {% for randevu in randevular %}
+                <tr>
+                    <td>{{ randevu.bolum }}</td>
+                    <td>{{ randevu.tarih }}</td>
+                    <td>{{ randevu.saat }}</td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align:center">
+                        <a href="hastarandevubilgileri.html" class="btn btn-sm btn-success">Detay Görüntüle</a>
+                    </td>
+                </tr>
+                {% endfor %}
                 </table>
             </div>
         </form>

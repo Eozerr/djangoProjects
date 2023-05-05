@@ -33,18 +33,18 @@ def hanasayfa(request):
 
 
 def hral(request):
+    tcno = request.session.get('tcno')
     bolumler = Bolum.objects.all()
-    tcno_degeri = request.session.get('tcno')
-    form = RandevuForm(request.POST or None,tcno=tcno_degeri)
     
     if request.method == 'POST':
-        # Verileri modele çevir
-        
-        randevu = form.save(commit=False)
-        # Verileri veritabanına kaydet
-        
-        randevu.save()
-        return redirect('hanasayfa.html')
+        form = RandevuForm(request.POST, tcno=tcno)
+        form.fields['tcno'].initial = tcno
+        if form.is_valid():
+            randevu = form.save(commit=False)
+            randevu.save()
+            print("Form is valid and submitted successfully.")
+    else:
+        form = RandevuForm(tcno=tcno)
     return render(request, 'hrandevual.html', {'form': form, 'bolumler': bolumler})
 
 
@@ -53,17 +53,11 @@ def hrbilgi(request):
     if not tcno:
         return redirect('hgiris')
     
-    try:
-        randevu = Randevu.objects.get(tcno=tcno)
-        saat = randevu.saat
-        tarih = randevu.tarih
-        bolum = randevu.bolum
-    except Randevu.DoesNotExist:
-        randevu = None
+    randevular = Randevu.objects.filter(tcno=tcno)
+    if not randevular:
         messages.warning(request, "Randevunuz bulunmamaktadır.")
     
-    form = LoginForm()
-    return render(request, 'hrandevubilgi.html', {'randevu': randevu,'saat': saat, 'tarih': tarih, 'bolum': bolum, 'form': form})
+    return render(request, 'hrandevubilgi.html', {'randevular': randevular})
     
 def hriptal(request):
     return render(request, 'hrandevuiptal.html')

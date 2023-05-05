@@ -9,14 +9,16 @@ class LoginForm(forms.Form):
     
     
 class RandevuForm(forms.ModelForm):
+    tcno = forms.CharField(widget=forms.HiddenInput())
+
     def __init__(self, *args, **kwargs):
-        tcno = kwargs.pop('tcno')  # tcno değerini kwargs'tan çıkarıyoruz
+        tcno = kwargs.pop('tcno', None)
         super(RandevuForm, self).__init__(*args, **kwargs)
-        self.fields['tcno'] = forms.CharField(initial=tcno, widget=forms.HiddenInput())
+        self.fields['tcno'].initial = tcno
 
     class Meta:
         model = Randevu
-        fields = ['tarih', 'saat', 'bolum']
+        fields = ['tcno', 'tarih', 'saat', 'bolum']
         widgets = {
             'tarih': forms.DateInput(attrs={'type': 'date'}),
             'saat': forms.TimeInput(attrs={'type': 'time'}),
