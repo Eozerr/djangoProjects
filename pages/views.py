@@ -63,8 +63,24 @@ def hriptal(request):
     return render(request, 'hrandevuiptal.html')
 def hrislem(request):
     return render(request, 'hrandevuislem.html')
+
 def hsdegis(request):
+    tcno = request.session.get('tcno')
+    hasta = Hasta.objects.get(tcno=tcno)
+    
+    if request.method == 'POST':
+        yeni_sifre = request.POST.get('yeni_sifre')
+        yeni_sifre_tekrar = request.POST.get('yeni_sifre_tekrar')
+        
+        if yeni_sifre == yeni_sifre_tekrar:
+            hasta.password = yeni_sifre
+            hasta.save()
+            return redirect('hanasayfa')
+        else:
+            messages.error(request, 'Şifreler eşleşmiyor.')
+    
     return render(request, 'hsifredegis.html')
+
 def hşifreu(request):
     if request.method == 'POST':
         tcno = request.POST.get('tcno')
