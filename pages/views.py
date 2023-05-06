@@ -120,8 +120,7 @@ def hşifreu(request):
     return render(request, 'hsifreunut.html')
 
 #Hekim tarafı 
-def daktifmuayne(request):
-    return render(request, 'daktifmuayne.html')
+
 def danasayfa(request):
     return render(request, 'danasayfa.html')
 def dbilgigoruntuleme(request):
@@ -131,7 +130,7 @@ def dgiris(request):
     
     if request.method == "POST":
         sifre = request.POST.get('sifre')
-
+        request.session['sifre'] = sifre
         try:
             doktor = Doktor.objects.get(sifre=sifre)
              # kullanıcı giriş yaptıktan sonra yönlendirileceği sayfanın adını buraya yazın
@@ -145,18 +144,30 @@ def dgiris(request):
 
 def drandevugoruntule(request):
     return render(request, 'drandevugoruntule.html')
-def drandevuiptal(request):
-    return render(request, 'drandevuiptal.html')
+
 def drandevuislem(request):
     return render(request, 'drandevuislem.html')
+
 def dsifredegis(request):
+    
+    sifre = request.session.get('sifre')
+    doktor = Doktor.objects.get(sifre=sifre)
+    
+    if request.method == 'POST':
+        yeni_sifre = request.POST.get('yeni_sifre')
+        yeni_sifre_tekrar = request.POST.get('yeni_sifre_tekrar')
+        
+        if yeni_sifre == yeni_sifre_tekrar:
+            doktor.sifre = yeni_sifre
+            doktor.save()
+            return redirect('danasayfa')
+        else:
+            messages.error(request, 'Şifreler eşleşmiyor.')
+    
     return render(request, 'dsifredegis.html')
-def gecmismuayne(request):
-    return render(request, 'gecmismuayne.html')
-def servisyatanhasta(request):
-    return render(request, 'servisyatanhasta.html')
-def taburcuhasta(request):
-    return render(request, 'taburcuhasta.html')
+
+
+
 
 
 

@@ -14,11 +14,9 @@ urlpatterns = [
     path('hasta-randevu-islem/', views.hrislem, name='hrislem'),
     path('hasta-sifre-degis/', views.hsdegis, name='hsdegis'),
     path('sifre-geri-al/', views.hşifreu, name='hşifreu'),
-    path('doktor-aktif-muayne/', views.daktifmuayne, name='daktifmuayne'),
     path('doktor-anasayfa/', views.danasayfa, name='danasayfa'),
     path('doktor-giris/', views.dgiris, name='dgiris'),
     path('doktor-randevu-goruntule/', views.drandevugoruntule, name='drandevugoruntule'),
-    path('doktor-randevu-iptal/', views.drandevuiptal, name='drandevuiptal'),
     path('doktor-randevu-islem/', views.drandevuislem, name='drandevuislem'),
     path('doktor-sifre-güncelle/', views.dsifredegis, name='dsifredegis'),
 

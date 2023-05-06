@@ -36,12 +36,13 @@
 
     <div class="giriskutusu">
         <h3>Şifre Yenileme</h3>
-        <form>
+        <form method="post">
+            {% csrf_token %}
             <p>Yeni Şifre:</p>
-            <input type="text" name="" placeholder="Yeni Şifre" >
-           <p>Şifre Tekrar:</p>
-           <input type="text"placeholder="Şifre Tekrar">
-           <input id="sifreyenile" type="submit" name="" value="Güncelle">
+            <input type="password" name="yeni_sifre" placeholder="Yeni Şifre" required>
+            <p>Şifre Tekrar:</p>
+            <input type="password" name="yeni_sifre_tekrar" placeholder="Şifre Tekrar" required>
+            <input id="sifreyenile" type="submit" name="" value="Güncelle">
         </form>
         </div>
 

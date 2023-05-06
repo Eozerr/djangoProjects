@@ -33,7 +33,9 @@ class Doktor(models.Model):
     idDoktor=models.IntegerField(primary_key=True)
     ad = models.CharField(max_length=100)
     soyad = models.CharField(max_length=100)
-    Bolum_idbolum = models.ForeignKey(Bolum, on_delete=models.CASCADE)
+    #Bolum_idbolum = models.ForeignKey(Bolum, on_delete=models.CASCADE)
+    Bolum = models.ForeignKey(Bolum, on_delete=models.CASCADE, null=True, blank=True, related_name='doktorlar',db_column='Bolum_idbolum')
+    sifre = models.CharField(max_length=45)
 
     def __str__(self):
         return f"{self.ad} {self.soyad}"
