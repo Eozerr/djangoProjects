@@ -19,6 +19,7 @@ urlpatterns = [
     path('doktor-randevu-goruntule/', views.drandevugoruntule, name='drandevugoruntule'),
     path('doktor-randevu-islem/', views.drandevuislem, name='drandevuislem'),
     path('doktor-sifre-güncelle/', views.dsifredegis, name='dsifredegis'),
+    path('doktor-sifre-unut/', views.dsifreunut, name='disfreunut'),
 
 ]
 

@@ -166,6 +166,30 @@ def dsifredegis(request):
     
     return render(request, 'dsifredegis.html')
 
+def dsifreunut(request):
+    
+    if request.method == 'POST':
+        id = request.POST.get('idDoktor')
+        email = request.POST.get('email')
+        try:
+            doktor = Doktor.objects.get(idDoktor=id)
+           
+                # Şifre sıfırlama kodları buraya yazılacak
+            send_mail(
+                    'Şifre Hatırlatma',
+                    f'Sayın Hekimimiz\nŞifreniz: {doktor.sifre}',
+                    'fakeemail123@gmail.com', # fake Gmail hesabınızın kullanıcı adı
+                    [email],
+                    fail_silently=False,     
+                )
+            return redirect('dgiris')
+            
+                
+        except Hasta.DoesNotExist:
+            messages.warning(request, "Girilen Doktor ID ile kayıtlı bir kullanıcı bulunamadı.")
+    return render(request,'dsifreunut.html')
+
+   
 
 
 
