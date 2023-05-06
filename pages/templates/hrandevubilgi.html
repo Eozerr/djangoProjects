@@ -53,7 +53,11 @@
                     <td></td>
                     <td></td>
                     <td style="text-align:center">
-                        <a href="hastarandevubilgileri.html" class="btn btn-sm btn-success">Detay Görüntüle</a>
+                        <form method="POST" action="{% url 'hriptal' %}" >
+                            {% csrf_token %}
+                            <input type="hidden" name="randevu_id" value="{{ randevu.id }}">
+                            <button type="submit" class="btn btn-sm btn-danger">Sil</button>
+                        </form>
                     </td>
                 </tr>
                 {% endfor %}

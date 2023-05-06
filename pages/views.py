@@ -43,6 +43,7 @@ def hral(request):
             randevu = form.save(commit=False)
             randevu.save()
             print("Form is valid and submitted successfully.")
+            return redirect('hanasayfa')
     else:
         form = RandevuForm(tcno=tcno)
     return render(request, 'hrandevual.html', {'form': form, 'bolumler': bolumler})
@@ -60,7 +61,22 @@ def hrbilgi(request):
     return render(request, 'hrandevubilgi.html', {'randevular': randevular})
     
 def hriptal(request):
-    return render(request, 'hrandevuiptal.html')
+    tcno = request.session.get('tcno')
+    randevu = Randevu.objects.filter(tcno=tcno)
+    
+    if request.method == 'POST':
+        randevu_id = request.POST.get('randevu_id')  # burada HTML formunda name="randevu_id" şeklinde bir input elemanı olmalıdır
+        try:
+            randevu = Randevu.objects.get(tcno=tcno, id=randevu_id)
+            randevu.delete()
+            return redirect('hanasayfa')
+        except Randevu.DoesNotExist:
+            # randevu yok ise hata mesajı göster veya istediğiniz gibi yönlendirme yapabilirsiniz
+            pass
+            
+    randevular = Randevu.objects.filter(tcno=tcno)
+    return render(request, 'hrandevuiptal.html', {'randevular': randevular})
+
 def hrislem(request):
     return render(request, 'hrandevuislem.html')
 
