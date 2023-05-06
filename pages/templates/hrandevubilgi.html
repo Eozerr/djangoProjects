@@ -55,7 +55,7 @@
                     <td style="text-align:center">
                         <form method="POST" action="{% url 'hriptal' %}" >
                             {% csrf_token %}
-                            <input type="hidden" name="randevu_id" value="{{ randevu.id }}">
+                            <input type="hidden" name="id" value="{{ randevu.id }}">
                             <button type="submit" class="btn btn-sm btn-danger">Sil</button>
                         </form>
                     </td>

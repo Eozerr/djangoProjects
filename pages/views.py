@@ -65,7 +65,7 @@ def hriptal(request):
     randevu = Randevu.objects.filter(tcno=tcno)
     
     if request.method == 'POST':
-        randevu_id = request.POST.get('randevu_id')  # burada HTML formunda name="randevu_id" şeklinde bir input elemanı olmalıdır
+        randevu_id = request.POST.get('id')  # burada HTML formunda name="randevu_id" şeklinde bir input elemanı olmalıdır
         try:
             randevu = Randevu.objects.get(tcno=tcno, id=randevu_id)
             randevu.delete()
@@ -75,7 +75,7 @@ def hriptal(request):
             pass
             
     randevular = Randevu.objects.filter(tcno=tcno)
-    return render(request, 'hrandevuiptal.html', {'randevular': randevular})
+    return render(request, 'hrandevubilgi.html', {'randevular': randevular})
 
 def hrislem(request):
     return render(request, 'hrandevuislem.html')
