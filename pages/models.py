@@ -40,7 +40,7 @@ class Randevu(models.Model):
     hastatcno = models.CharField(max_length=11,null=True)
     tarih = models.DateField()
     saat = models.TimeField()
-    doktorid = models.ForeignKey(Doktor, on_delete=models.CASCADE, null=True, blank=True, related_name='doktorids',db_column='doktorid')
+    doktorid = models.ForeignKey(Doktor, on_delete=models.CASCADE, null=True, blank=True, related_name='doktorlar',db_column='doktorid')
     
     class Meta:
         db_table = "randevu"

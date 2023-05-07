@@ -32,38 +32,35 @@
             </ul>
         </nav>
     </section>
-
-    <div class="container col-md-10 pt-5">
-        <div style="overflow-x:auto;">
-            <table class="table table-striped text-white ">
-                <tr style="background-color:grey">
-                    <th>Hasta T.C. Kimlik No</th>
-                    <th>Hasta Ad-Soyad</th>
-                    <th>Randevu Tarihi</th>
-                    <th>Randevu Saati</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-    
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-    
-                    <td style="text-align:center"><a href="doktorrandevugoruntule.html"
-                            class="btn btn-sm btn-success">Görüntüle</a></td>
-                </tr>
-    
-    
-            </table>
-        </div>
-    </div>
-
+    <form method="POST" action="{% url 'drandevugoruntule' %}">
+        <div class="container col-md-10 pt-5">
+                <div style="overflow-x:auto;">
+                    <table class="table table-striped text-white ">
+                        <tr style="background-color:grey">
+                            <th name="hastatcno">Hasta T.C. Kimlik No</th>
+                            <th name="tarih">Randevu Tarihi</th>
+                            <th name="saat">Randevu Saati</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+            
+                        {% for randevu in randevular %}
+                        <tr>
+                            <td>{{ randevu.hastatcno}}</td>
+                            <td>{{ randevu.tarih }}</td>
+                            <td>{{ randevu.saat }}</td>
+                            <td></td>
+                            <td></td>
+                            
+                        </tr>
+                        {% endfor %}
+            
+            
+                    </table>
+                </div>
+            </div>
+     </form>
 </body>
 
 </html>

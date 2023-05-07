@@ -130,7 +130,9 @@ def dgiris(request):
     
     if request.method == "POST":
         sifre = request.POST.get('sifre')
+        id = request.POST.get('idDoktor')
         request.session['sifre'] = sifre
+        request.session['idDoktor'] = id
         try:
             doktor = Doktor.objects.get(sifre=sifre)
              # kullanıcı giriş yaptıktan sonra yönlendirileceği sayfanın adını buraya yazın
@@ -143,7 +145,12 @@ def dgiris(request):
         return render(request,'dgiris.html') 
 
 def drandevugoruntule(request):
-    return render(request, 'drandevugoruntule.html')
+    id = request.session.get('idDoktor')
+    randevular = Randevu.objects.filter(doktorid=id)
+    if not randevular:
+        messages.warning(request, "Randevunuz bulunmamaktadır.")
+    
+    return render(request, 'drandevugoruntule.html', {'randevular': randevular})
 
 def drandevuislem(request):
     return render(request, 'drandevuislem.html')
