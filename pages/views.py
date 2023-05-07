@@ -62,17 +62,17 @@ def hrbilgi(request):
     
 def hriptal(request):
     tcno = request.session.get('tcno')
-    randevu = Randevu.objects.filter(tcno=tcno)
+    randevu = Randevu.objects.filter(hastatcno=tcno)
     
     if request.method == 'POST':
         randevu_id = request.POST.get('id')  # burada HTML formunda name="randevu_id" şeklinde bir input elemanı olmalıdır
         try:
-            randevu = Randevu.objects.get(tcno=tcno, id=randevu_id)
+            randevu = Randevu.objects.get(hastatcno=tcno, id=randevu_id)
             randevu.delete()
             return redirect('hanasayfa')
         except Randevu.DoesNotExist:
             # randevu yok ise hata mesajı göster veya istediğiniz gibi yönlendirme yapabilirsiniz
-            pass
+            return redirect('hanasayfa')
             
     randevular = Randevu.objects.filter(tcno=tcno)
     return render(request, 'hrandevubilgi.html', {'randevular': randevular})
