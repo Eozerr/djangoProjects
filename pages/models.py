@@ -7,17 +7,7 @@ class Hasta(models.Model):
 
     class Meta:
         db_table = "register_hasta"
-class Randevu(models.Model):
-    tcno = models.CharField(max_length=11,null=True)
-    tarih = models.DateField()
-    saat = models.TimeField()
-    bolum = models.CharField(max_length=255)
-    
-    class Meta:
-        db_table = "register_randevu"
-        
-    def __str__(self):
-        return f"{self.bolum} - {self.saat} - {self.tarih} - {self.tcno}"
+
     
 class Bolum(models.Model):
     bolumad = models.CharField(max_length=100)
@@ -42,3 +32,18 @@ class Doktor(models.Model):
     
     class Meta:
         db_table = "register_doktor"
+        
+        
+class Randevu(models.Model):
+
+    bolum = models.ForeignKey(Bolum,on_delete=models.CASCADE, null=True, blank=True, related_name='bolums',db_column='bolum')
+    hastatcno = models.CharField(max_length=11,null=True)
+    tarih = models.DateField()
+    saat = models.TimeField()
+    doktorid = models.ForeignKey(Doktor, on_delete=models.CASCADE, null=True, blank=True, related_name='doktorids',db_column='doktorid')
+    
+    class Meta:
+        db_table = "randevu"
+        
+    def __str__(self):
+        return f"{self.bolum.bolumad} - {self.saat} - {self.tarih} - {self.hastatcno}"

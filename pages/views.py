@@ -1,5 +1,5 @@
 from pyexpat.errors import messages
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login
 from pages.forms import LoginForm, RandevuForm
 from django.core.mail import send_mail
@@ -35,10 +35,10 @@ def hanasayfa(request):
 def hral(request):
     tcno = request.session.get('tcno')
     bolumler = Bolum.objects.all()
-    
+
     if request.method == 'POST':
         form = RandevuForm(request.POST, tcno=tcno)
-        form.fields['tcno'].initial = tcno
+        form.fields['hastatcno'].initial = tcno
         if form.is_valid():
             randevu = form.save(commit=False)
             randevu.save()
@@ -54,7 +54,7 @@ def hrbilgi(request):
     if not tcno:
         return redirect('hgiris')
     
-    randevular = Randevu.objects.filter(tcno=tcno)
+    randevular = Randevu.objects.filter(hastatcno=tcno)
     if not randevular:
         messages.warning(request, "Randevunuz bulunmamaktadır.")
     

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Bolum,Doktor,Randevu
+from .models import Bolum,Doktor, Hasta,Randevu
 from django.db.models import QuerySet as queryset
 
 
@@ -9,18 +9,20 @@ class LoginForm(forms.Form):
     
     
 class RandevuForm(forms.ModelForm):
-    tcno = forms.CharField(widget=forms.HiddenInput())
+    hastatcno = forms.CharField(widget=forms.HiddenInput())
 
     def __init__(self, *args, **kwargs):
         tcno = kwargs.pop('tcno', None)
         super(RandevuForm, self).__init__(*args, **kwargs)
-        self.fields['tcno'].initial = tcno
+        self.fields['hastatcno'].initial = tcno
 
     class Meta:
         model = Randevu
-        fields = ['tcno', 'tarih', 'saat', 'bolum']
+        fields = [ 'tarih', 'saat', 'bolum','hastatcno']
         widgets = {
             'tarih': forms.DateInput(attrs={'type': 'date'}),
             'saat': forms.TimeInput(attrs={'type': 'time'}),
             'bolum': forms.Select(attrs={'id': 'bolum-secimi'})
         }
+
+
