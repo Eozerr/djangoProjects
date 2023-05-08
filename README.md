@@ -1,4 +1,4 @@
-## Hospital Management System
+## Hospital Automation With Django  
 This is a Hospital Management System developed using Django web framework. The system allows doctors, nurses, and administrators to manage hospital operations such as patient management, appointment booking, and medical record keeping.
 
 ## Installation
