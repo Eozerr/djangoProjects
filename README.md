@@ -4,7 +4,7 @@ This is a Hospital Management System developed using Django web framework. The s
 ## Installation
 Clone the repository using the command git clone https://github.com/your-username/hospital-management-system.git  
 Install the required dependencies using pip install -r requirements.txt  
-Download the sql file and create the database
+Download the sql file and create the database  
 Create a superuser account using python manage.py createsuperuser  
 Run the development server using python manage.py runserver  
 ## Usage
