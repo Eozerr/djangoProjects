@@ -29,7 +29,13 @@
             <p>E-mail Adresinizi Giriniz:</p>
             <input type="email" name="email" placeholder="e-mail">
             <input id="sifreunuttum" type="submit" name="" value="Gönder" >
-          
+            {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
         </form>
     </div>
 

@@ -192,7 +192,7 @@ def dsifreunut(request):
             return redirect('dgiris')
             
                 
-        except Hasta.DoesNotExist:
+        except Doktor.DoesNotExist:
             messages.warning(request, "Girilen Doktor ID ile kayıtlı bir kullanıcı bulunamadı.")
     return render(request,'dsifreunut.html')
 

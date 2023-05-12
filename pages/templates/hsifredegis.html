@@ -40,6 +40,13 @@
             <p>Şifre Tekrar:</p>
             <input type="password" name="yeni_sifre_tekrar" placeholder="Şifre Tekrar" required>
             <input id="sifreyenile" type="submit" name="" value="Güncelle">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </form>
     </div>
 
