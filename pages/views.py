@@ -1,8 +1,9 @@
-from pyexpat.errors import messages
+
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login
 from pages.forms import LoginForm, RandevuForm
 from django.core.mail import send_mail
+from django.contrib import messages
 from pages.models import Bolum, Doktor,  Hasta, Randevu
 
 #Hasta tarafı
@@ -148,7 +149,8 @@ def drandevugoruntule(request):
     id = request.session.get('idDoktor')
     randevular = Randevu.objects.filter(doktorid=id)
     if not randevular:
-        messages.warning(request, "Randevunuz bulunmamaktadır.")
+        messages.error(request, "Randevunuz bulunmamaktadır.")
+        randevular = []
     
     return render(request, 'drandevugoruntule.html', {'randevular': randevular})
 
